@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d2058b1058cb24f8c3bbafd8acafe6, type: 3}
+  m_Name: Level 2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelPropertiesSO
+  scene: 3
+  requiredScore: 250
+  timeLimit: 30
+  bombList:
+  - {fileID: 7082241993180553659, guid: 9718dbd9df8aa8940b7e502e9ab39b7e, type: 3}
+  fruitList:
+  - {fileID: 6749107705877972022, guid: 31d68735532a20c48875d008b04e6608, type: 3}
+  bombPercentage: 22.5
+  throwIntervalMin: 0.75
+  throwIntervalMax: 1.5
