@@ -34,7 +34,7 @@ public class GameSceneManager : MonoBehaviour
         // Subscribe necessary Events
         LevelsUI.OnLevelButtonPressed += LoadSpesificLevelScene;
         MainMenuUI.OnPlayButtonPressed += LoadLevelsScene;
-        GameDataManager.OnDataSavedBeforeSceneChanged += LoadLevelsScene;
+        GameDataManager.OnDataSavedBeforeSceneChanged += LoadLevelsSceneWithAnimation;
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class GameSceneManager : MonoBehaviour
         // Unsubscribe from Subscribed Evets
         LevelsUI.OnLevelButtonPressed -= LoadSpesificLevelScene;
         MainMenuUI.OnPlayButtonPressed -= LoadLevelsScene;
-        GameDataManager.OnDataSavedBeforeSceneChanged -= LoadLevelsScene;
+        GameDataManager.OnDataSavedBeforeSceneChanged -= LoadLevelsSceneWithAnimation;
     }
 
     #endregion
@@ -57,6 +57,15 @@ public class GameSceneManager : MonoBehaviour
     private void LoadSpesificLevelScene(GameSceneManager.GameScene scene) => LoadScene(scene);
 
     private void LoadLevelsScene() => LoadScene(GameScene.Levels);
+
+    private void LoadLevelsSceneWithAnimation() => StartCoroutine(WaitForSeconds(1.5f));
+
+    IEnumerator WaitForSeconds(float seconds)
+    {
+        // TODO: Should add Animations
+        yield return new WaitForSeconds(seconds);
+        LoadLevelsScene();
+    }
 
     #endregion
 

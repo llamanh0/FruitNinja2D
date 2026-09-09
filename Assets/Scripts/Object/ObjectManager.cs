@@ -18,7 +18,7 @@ public class ObjectManager : MonoBehaviour
     private const float MAX_POSITION_X = 10f;
     private const float MIN_ANGLE_Z = 30;
     private const float MAX_ANGLE_Z = 60;
-    private const float OBJECT_DESTROY_TIME = 3.5f;
+    private const float OBJECT_DESTROY_TIME = 10f;
 
     private Vector3 _randomAngle;
     private Vector3 _randomPosition;

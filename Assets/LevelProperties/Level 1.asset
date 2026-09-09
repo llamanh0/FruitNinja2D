@@ -16,9 +16,9 @@ MonoBehaviour:
   requiredScore: 100
   timeLimit: 30
   bombList:
-  - {fileID: 7082241993180553659, guid: 9718dbd9df8aa8940b7e502e9ab39b7e, type: 3}
+  - {fileID: 4834619235466675126, guid: ce3d006398e4efa4fbdad392e7bf909f, type: 3}
   fruitList:
-  - {fileID: 6749107705877972022, guid: 31d68735532a20c48875d008b04e6608, type: 3}
+  - {fileID: 5279206818107948068, guid: db242d6415663d14a8ad84ba6ca82e4e, type: 3}
   bombPercentage: 10
   throwIntervalMin: 1
   throwIntervalMax: 2

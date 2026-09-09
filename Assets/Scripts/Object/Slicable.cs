@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
-public class Slicable : MonoBehaviour
+public class Slicable : BaseObject
 {
+    public static event Action OnSlicableMissed;
+
     [Header("Object Referances")]
     [SerializeField] private GameObject _unslicedObject;
     [SerializeField] private GameObject _horizontalySliced;
@@ -18,14 +21,27 @@ public class Slicable : MonoBehaviour
 
     private Rigidbody2D _mainRb;
 
+    private float _missingThresholdPositionY = -.5f;
+    private bool _isCutted = false;
+
     private void Awake()
     {
         _mainRb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (transform.position.y < _missingThresholdPositionY && !_isCutted)
+        { 
+            OnSlicableMissed?.Invoke(); 
+            Destroy(gameObject);
+        }
+    }
+
     public void Cut(Vector2 swipeDirection)
     {
         _unslicedObject.SetActive(false);
+        _isCutted = true;
         Vector2 currentVelocity = _mainRb != null ? _mainRb.linearVelocity : Vector2.zero;
 
         if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y))

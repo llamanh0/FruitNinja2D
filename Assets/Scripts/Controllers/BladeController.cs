@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BladeController : MonoBehaviour
 {
-    public static event EventHandler OnFruitSliced;
-    public static event EventHandler OnBombSliced;
+    public static event Action OnSlicableSliced;
+    public static event Action OnBombSliced;
 
     private Collider2D _collider;
 
@@ -30,21 +30,21 @@ public class BladeController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Slicable fruit = collision.GetComponent<Slicable>();
+        Slicable slicable = collision.GetComponent<Slicable>();
         Explosive bomb = collision.GetComponent<Explosive>();
 
         // Disable Collider
         collision.enabled = false;
 
-        if (fruit != null)
+        if (slicable != null)
         {
-            OnFruitSliced?.Invoke(this, EventArgs.Empty);
-            fruit.Cut(_swipeDirection);
+            OnSlicableSliced?.Invoke();
+            slicable.Cut(_swipeDirection);
         }
 
         if (bomb != null)
         {
-            OnBombSliced?.Invoke(this, EventArgs.Empty);
+            OnBombSliced?.Invoke();
             bomb.Explode();
         }
     }

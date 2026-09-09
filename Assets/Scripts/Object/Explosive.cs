@@ -1,17 +1,18 @@
-using Cinemachine;
+
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class Explosive : MonoBehaviour
+public class Explosive : BaseObject
 {
     public event EventHandler OnBombExplode;
 
-    [SerializeField] private GameObject _explosionVFX;
+    [SerializeField] private VisualEffect _explosionVFX;
     [SerializeField] private GameObject _explosiveObjectSprite;
 
     private Rigidbody2D _rb;
-    private CinemachineImpulseSource _impulseSource;
+    private Unity.Cinemachine.CinemachineImpulseSource _impulseSource;
 
     private float _explosionTime = 2f;
     private bool _isExploded = false;
@@ -19,13 +20,14 @@ public class Explosive : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
+        _impulseSource = GetComponent<Unity.Cinemachine.CinemachineImpulseSource>();
     }
 
     public void Explode()
     { 
         if (_isExploded) return;
         _isExploded = true;
+        _rotation = Vector3.zero;
         OnBombExplode?.Invoke(this, EventArgs.Empty);
         StartCoroutine(ExplosionCourotine());
     }
@@ -35,6 +37,8 @@ public class Explosive : MonoBehaviour
         _rb.linearVelocity = Vector2.zero;
         _rb.Sleep();
 
+        if (_explosionVFX != null) _explosionVFX.Play();
+
         _impulseSource.GenerateImpulse();
         _impulseSource.enabled = false;
 
@@ -42,7 +46,6 @@ public class Explosive : MonoBehaviour
 
         Time.timeScale = 0.1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        _explosionVFX.SetActive(true);
 
         yield return new WaitForSecondsRealtime(_explosionTime);
 

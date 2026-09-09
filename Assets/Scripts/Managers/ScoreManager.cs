@@ -15,8 +15,9 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
-        BladeController.OnFruitSliced += OnFruitSliced;
+        BladeController.OnSlicableSliced += OnSlicableSliced;
         BladeController.OnBombSliced += OnBombSliced;
+        Slicable.OnSlicableMissed += OnSlicableMissed;
     }
 
     private void Start()
@@ -35,21 +36,28 @@ public class ScoreManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        BladeController.OnFruitSliced -= OnFruitSliced;
+        BladeController.OnSlicableSliced -= OnSlicableSliced;
         BladeController.OnBombSliced -= OnBombSliced;
+        Slicable.OnSlicableMissed -= OnSlicableMissed;
     }
 
     #endregion
 
-    private void OnFruitSliced(object sender, System.EventArgs e)
+    private void OnSlicableSliced()
     {
-        _currentScore += 25;
+        _currentScore += 10;
         UpdateScore();
     }
 
-    private void OnBombSliced(object sender, System.EventArgs e)
+    private void OnBombSliced()
     {
-        _currentScore -= 10;
+        _currentScore -= 50;
+        UpdateScore();
+    }
+
+    private void OnSlicableMissed()
+    {
+        _currentScore -= 15;
         UpdateScore();
     }
 
